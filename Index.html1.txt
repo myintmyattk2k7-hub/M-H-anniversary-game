@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Love Guessing Game 💖</title>
+  <style>
+    body {
+      font-family: 'Georgia', serif;
+      background: #fff0f6;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding: 40px;
+      overflow-x: hidden;
+    }
+    h1 {
+      color: #d6336c;
+    }
+    .game-box {
+      margin-top: 30px;
+      padding: 20px;
+      border: 2px solid #d6336c;
+      border-radius: 10px;
+      background: #fff;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 5px;
+    }
+    input {
+      border: 1px solid #d6336c;
+    }
+    button {
+      background: #d6336c;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    .hidden {
+      display: none;
+    }
+    #ring {
+      font-size: 60px;
+      margin-top: 20px;
+    }
+    @keyframes fall {
+      to {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>💖 Love Guessing Game 💖</h1>
+  <p>Answer the questions correctly to unlock the final surprise!</p>
+
+  <div class="game-box">
+    <!-- Level 1 -->
+    <div id="level1">
+      <h2>Level 1</h2>
+      <p>What is our anniversary date?</p>
+      <input type="text" id="answer1" placeholder="Enter your answer">
+      <button onclick="checkLevel1()">Submit</button>
+      <p id="feedback1"></p>
+    </div>
+
+    <!-- Level 2 -->
+    <div id="level2" class="hidden">
+      <h2>Level 2</h2>
+      <p>What is Myint’s birthday?</p>
+      <input type="text" id="answer2" placeholder="Enter your answer">
+      <button onclick="checkLevel2()">Submit</button>
+      <p id="feedback2"></p>
+    </div>
+
+    <!-- Level 3 -->
+    <div id="level3" class="hidden">
+      <h2>Level 3</h2>
+      <p>Where was our first kiss?</p>
+      <input type="text" id="answer3" placeholder="Enter your answer">
+      <button onclick="checkLevel3()">Submit</button>
+      <p id="feedback3"></p>
+    </div>
+
+    <!-- Level 4 -->
+    <div id="level4" class="hidden">
+      <h2>Level 4</h2>
+      <p>Will you love me forever?</p>
+      <button onclick="checkLevel4('yes')">Yes</button>
+      <button onclick="checkLevel4('yes')">Yes</button>
+      <p id="feedback4"></p>
+    </div>
+
+    <!-- Level 5 -->
+    <div id="level5" class="hidden">
+      <h2>Final Level</h2>
+      <p>Will you marry me?</p>
+      <button onclick="checkLevel5('yes')">Yes</button>
+      <button onclick="checkLevel5('no')">No</button>
+      <p id="feedback5"></p>
+      <div id="celebration" class="hidden">
+        <h2>💍 You said YES! 💍</h2>
+        <p>Forever starts now… 💖</p>
+        <div id="ring">💍</div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function checkLevel1() {
+      const ans = document.getElementById("answer1").value.trim();
+      if(ans === "5.6.2024"){
+        document.getElementById("feedback1").innerText = "Correct! 💕";
+        document.getElementById("level1").classList.add("hidden");
+        document.getElementById("level2").classList.remove("hidden");
+      } else {
+        document.getElementById("feedback1").innerText = "Try again!";
+      }
+    }
+
+    function checkLevel2() {
+      const ans = document.getElementById("answer2").value.trim();
+      if(ans === "10.5.2007"){
+        document.getElementById("feedback2").innerText = "Correct! 💕";
+        document.getElementById("level2").classList.add("hidden");
+        document.getElementById("level3").classList.remove("hidden");
+      } else {
+        document.getElementById("feedback2").innerText = "Try again!";
+      }
+    }
+
+    function checkLevel3() {
+      const ans = document.getElementById("answer3").value.trim().toLowerCase();
+      if(ans === "cinema"){
+        document.getElementById("feedback3").innerText = "Correct! 💕";
+        document.getElementById("level3").classList.add("hidden");
+        document.getElementById("level4").classList.remove("hidden");
+      } else {
+        document.getElementById("feedback3").innerText = "Try again!";
+      }
+    }
+
+    function checkLevel4(ans) {
+      if(ans === "yes"){
+        document.getElementById("feedback4").innerText = "Of course 💕";
+        document.getElementById("level4").classList.add("hidden");
+        document.getElementById("level5").classList.remove("hidden");
+      }
+    }
+
+    function checkLevel5(ans) {
+      if(ans === "yes"){
+        document.getElementById("feedback5").innerText = "She said YES! 💕";
+        document.getElementById("celebration").classList.remove("hidden");
+        startFlowers();
+      } else {
+        document.getElementById("feedback5").innerText = "Try again 😉";
+      }
+    }
+
+    // Falling flowers effect
+    function startFlowers(){
+      setInterval(() => {
+        const flower = document.createElement("div");
+        flower.innerHTML = "🌸";
+        flower.style.position = "fixed";
+        flower.style.left = Math.random() * window.innerWidth + "px";
+        flower.style.top = "-20px";
+        flower.style.fontSize = "24px";
+        flower.style.animation = "fall 5s linear forwards";
+        document.body.appendChild(flower);
+        setTimeout(() => flower.remove(), 5000);
+      }, 300);
+    }
+  </script>
+</body>
+</html>
